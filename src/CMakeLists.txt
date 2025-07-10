@@ -61,8 +61,12 @@ if (ANDROID)
   # Support Android 15 16k page size.
   target_link_options(fllama PRIVATE "-Wl,-z,max-page-size=16384")
 endif()
-target_include_directories(fllama PUBLIC .)
-add_executable(fllama_wasm fllama_wasm_entry.cpp)
+target_include_directories(fllama PUBLIC
+.
+${CMAKE_CURRENT_SOURCE_DIR}/llama.cpp
+${CMAKE_CURRENT_SOURCE_DIR}/llama.cpp/common
+${CMAKE_CURRENT_SOURCE_DIR}/llama.cpp/examples/llava
+)add_executable(fllama_wasm fllama_wasm_entry.cpp)
 target_link_libraries(fllama_wasm fllama) # Link against your library
 target_link_libraries(fllama PUBLIC llama common)
 
